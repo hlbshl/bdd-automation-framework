@@ -26,7 +26,7 @@ public class DriverFactory {
         switch (getBrowserType()) {
             case ("chrome") -> {
                 System.setProperty("webdriver.chrome.driver",
-                        System.getProperty("user.dir") + "scr/main/java/driver/drivers/chromedriver");
+                        System.getProperty("user.dir") + "/src/main/java/driver/drivers/chromedriver");
                 ChromeOptions chromeOptions = new ChromeOptions();
                 chromeOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
                 driver = new ChromeDriver(chromeOptions);
@@ -34,14 +34,13 @@ public class DriverFactory {
             }
             case ("firefox") -> {
                 System.setProperty("webdriver.geckodriver.driver",
-                        System.getProperty("user.dir") + "scr/main/java/driver/drivers/geckodriver");
+                        System.getProperty("user.dir") + "/scr/main/java/driver/drivers/geckodriver");
                 FirefoxOptions firefoxOptions = new FirefoxOptions();
                 firefoxOptions.setPageLoadStrategy(PageLoadStrategy.NORMAL);
                 driver = new FirefoxDriver(firefoxOptions);
                 break;
             }
         }
-        assert driver != null;
         driver.manage().window().maximize();
         return driver;
     }
@@ -51,7 +50,7 @@ public class DriverFactory {
         try {
             Properties properties = new Properties();
             FileInputStream file = new FileInputStream(System.getProperty("user.dir")
-                    + "src/main/java/properties/config.properties");
+                    + "/src/main/java/properties/config.properties");
             properties.load(file);
             browserType = properties.getProperty("browser").toLowerCase().trim();
         } catch (IOException ex) {
