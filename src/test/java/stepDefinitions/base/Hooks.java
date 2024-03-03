@@ -1,9 +1,6 @@
 package stepDefinitions.base;
 
-import io.cucumber.java.After;
-import io.cucumber.java.AfterStep;
-import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
+import io.cucumber.java.*;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 
@@ -14,9 +11,14 @@ import static driver.DriverFactory.getDriver;
 
 public class Hooks {
 
+    static boolean firstSession = true;
+
     @Before
     public void setup() {
-        getDriver();
+        if (firstSession) {
+            getDriver();
+            firstSession = false;
+        }
     }
 
     @AfterStep
@@ -30,8 +32,8 @@ public class Hooks {
         }
     }
 
-    @After
-    public void tearDown() {
+    @AfterAll
+    public static void after_all() {
         cleanUpDriver();
     }
 }

@@ -14,6 +14,18 @@ public class MainPage_PO extends Base_PO {
     private @FindBy(xpath = "//*[@id='language-modal-btn']/img")
     WebElement english_flag;
 
+    private @FindBy(id = "origin-input")
+    WebElement departure_station;
+
+    private @FindBy(id = "destination-input")
+    WebElement arrival_station;
+
+    private @FindBy(id = "search-button")
+    WebElement search_button;
+
+    private @FindBy(id = "list")
+    WebElement searchResults;
+
     public MainPage_PO() {
         super();
     }
@@ -29,5 +41,20 @@ public class MainPage_PO extends Base_PO {
     public void verifyEnglishLanguageSelected() {
         waitFor(english_flag);
         Assert.assertEquals(english_flag.getAttribute("alt"), "Flag Icon en-US");
+    }
+
+    public void selectDepartureStation() throws InterruptedException {
+        waitForElementAndPassValue(departure_station, "Istanbul Anatolia");
+    }
+
+    public void selectArrivalStation() throws InterruptedException {
+        waitForElementAndPassValue(arrival_station, "Izmir");
+    }
+    public void clickSearchButton() {
+        waitForElementAndClick(search_button);
+    }
+
+    public void verifySearchResultsExist() {
+        waitFor(searchResults);
     }
 }

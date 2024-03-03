@@ -2,6 +2,7 @@ package pageObjects;
 
 import driver.DriverFactory;
 import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.PageFactory;
@@ -24,6 +25,23 @@ public class Base_PO {
 
     public void navigate_to_URL(String url) {
         getDriver().get(url);
+    }
+
+    public void waitForElementAndPassValue(By by, String value) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(DEFAULT_EXPLICIT_TIMEOUT));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(by)).sendKeys(value);
+        getDriver().wait(5000);
+        getDriver().findElement(by).sendKeys(Keys.ENTER);
+    }
+
+    public void waitForElementAndPassValue(WebElement element, String value) throws InterruptedException {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(DEFAULT_EXPLICIT_TIMEOUT));
+        WebElement searchResult = wait.until(ExpectedConditions.visibilityOf(element));
+        searchResult.sendKeys(value);
+
+// temporary mock to wait until results appear. Will be replaced with a better solution
+        Thread.sleep(5000);
+        searchResult.sendKeys(Keys.ENTER);
     }
 
     public void waitForElementAndClick(By by) {

@@ -29,38 +29,28 @@ public class MainPageSteps {
         mainPage_po.selectEnglishLanguage();
     }
 
-    @When("actor searches for Istanbul Anatolia depurture station")
-    public void actor_searches_for_istanbul_anatolia_depurture_station() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    @When("actor searches for Istanbul Anatolia departure station")
+    public void actor_searches_for_istanbul_anatolia_depurture_station() throws InterruptedException {
+        mainPage_po.selectDepartureStation();
     }
 
     @When("actor searches for Izmir arrival station")
-    public void actor_searches_for_izmir_arrival_station() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
-    }
-
-    @When("actor selects today date")
-    public void actor_selects_today_date() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+    public void actor_searches_for_izmir_arrival_station() throws InterruptedException {
+        mainPage_po.selectArrivalStation();
     }
 
     @When("actor clicks on search button")
     public void actor_clicks_on_search_button() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        mainPage_po.clickSearchButton();
     }
+
     @Then("actor verifies page is displayed in English")
     public void actor_verifies_page_displayed_in_english() {
-       mainPage_po.verifyEnglishLanguageSelected();
+        mainPage_po.verifyEnglishLanguageSelected();
     }
 
     @Then("actor verifies search results are present")
     public void actor_verifies_search_results_are_present() {
-        // Write code here that turns the phrase above into concrete actions
-        throw new io.cucumber.java.PendingException();
+        mainPage_po.verifySearchResultsExist();
     }
-
 }
