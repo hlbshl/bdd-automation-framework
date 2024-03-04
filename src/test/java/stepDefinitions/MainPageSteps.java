@@ -29,14 +29,14 @@ public class MainPageSteps {
         mainPage_po.selectEnglishLanguage();
     }
 
-    @When("actor searches for Istanbul Anatolia departure station")
-    public void actor_searches_for_istanbul_anatolia_depurture_station() throws InterruptedException {
-        mainPage_po.selectDepartureStation();
+    @When("actor searches for {string} departure station")
+    public void actor_searches_for_depurture_station(String departure) {
+        mainPage_po.selectDepartureStation(departure);
     }
 
-    @When("actor searches for Izmir arrival station")
-    public void actor_searches_for_izmir_arrival_station() throws InterruptedException {
-        mainPage_po.selectArrivalStation();
+    @When("actor searches for {string} arrival station")
+    public void actor_searches_for_izmir_arrival_station(String arrival) {
+        mainPage_po.selectArrivalStation(arrival);
     }
 
     @When("actor clicks on search button")

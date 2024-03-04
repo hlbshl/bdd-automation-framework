@@ -1,11 +1,9 @@
 package pageObjects;
 
 import driver.DriverFactory;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedCondition;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -38,9 +36,7 @@ public class Base_PO {
         WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(DEFAULT_EXPLICIT_TIMEOUT));
         WebElement searchResult = wait.until(ExpectedConditions.visibilityOf(element));
         searchResult.sendKeys(value);
-
-// temporary mock to wait until results appear. Will be replaced with a better solution
-        Thread.sleep(5000);
+        getDriver().wait(5000);
         searchResult.sendKeys(Keys.ENTER);
     }
 

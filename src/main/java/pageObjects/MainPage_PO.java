@@ -1,8 +1,15 @@
 package pageObjects;
 
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
+
+import java.time.Duration;
+
+import static utils.GlobalVariables.DEFAULT_EXPLICIT_TIMEOUT;
 
 public class MainPage_PO extends Base_PO {
     private @FindBy(id = "language-modal-btn")
@@ -26,6 +33,12 @@ public class MainPage_PO extends Base_PO {
     private @FindBy(id = "list")
     WebElement searchResults;
 
+    private @FindBy(xpath = "//*[@id='origin']/div[2]/ul/li[1]/span[contains(text(), 'Istanbul Anatolia')]")
+    WebElement firstElementOfOrigin;
+
+    private @FindBy(xpath = "//*[@id='destination']/div[2]/ul/li[1]/span[contains(text(), 'Izmir')]")
+    WebElement firstElementOfDestination;
+
     public MainPage_PO() {
         super();
     }
@@ -43,18 +56,27 @@ public class MainPage_PO extends Base_PO {
         Assert.assertEquals(english_flag.getAttribute("alt"), "Flag Icon en-US");
     }
 
-    public void selectDepartureStation() throws InterruptedException {
-        waitForElementAndPassValue(departure_station, "Istanbul Anatolia");
+    public void selectDepartureStation(String departure) {
+        waitForElementAndPassValue(departure_station, departure, firstElementOfOrigin);
     }
 
-    public void selectArrivalStation() throws InterruptedException {
-        waitForElementAndPassValue(arrival_station, "Izmir");
+    public void selectArrivalStation(String arrival) {
+        waitForElementAndPassValue(arrival_station, arrival, firstElementOfDestination);
     }
+
     public void clickSearchButton() {
         waitForElementAndClick(search_button);
     }
 
     public void verifySearchResultsExist() {
         waitFor(searchResults);
+    }
+
+    public void waitForElementAndPassValue(WebElement element, String value, WebElement result) {
+        WebDriverWait wait = new WebDriverWait(getDriver(), Duration.ofSeconds(DEFAULT_EXPLICIT_TIMEOUT));
+        WebElement searchResult = wait.until(ExpectedConditions.visibilityOf(element));
+        searchResult.sendKeys(value);
+        wait.until(ExpectedConditions.visibilityOf(result));
+        searchResult.sendKeys(Keys.ENTER);
     }
 }
