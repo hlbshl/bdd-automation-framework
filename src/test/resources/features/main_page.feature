@@ -9,7 +9,7 @@ Feature: Change the language and search for a bus
     Then actor verifies page is displayed in English
 
   Scenario: Search for today's bus from Istanbul Anatolia
-    When actor searches for 'Istanbul Anatolia' departure station
-    And actor searches for 'Izmir' arrival station
+    When actor searches for 'Adana' departure station
+    And actor searches for 'Bursa' arrival station
     And actor clicks on search button
     Then actor verifies search results are present
